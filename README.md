@@ -4,7 +4,7 @@ This software is designed to estimate autosomal contamination in ancient DNA sam
 
 Citation:  
 
-Steps for use:\\
+Steps for use:\newline
 Section 1)  Pre-processing steps:
 Part 1)  Download panels 
 	Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD/
