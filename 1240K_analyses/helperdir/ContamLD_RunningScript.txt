@@ -1,0 +1,11 @@
+#!/bin/bash
+## Preparation Steps
+cd $2
+mkdir -p $2/directories
+mkdir -p $2/directories/$3_jackknife
+grep $3 $2/$3_All.readdepth | awk '{print $2 "\t" $3 "\t" $8 "\t" $9}' > ./directories/$3_jackknife/$3_reads_107k.txt
+grep $3 $2/$3_dam.readdepth | awk '{print $2 "\t" $3 "\t" $8 "\t" $9}' > ./directories/$3_jackknife/$3_reads_107k_D.txt
+
+## Main Contamination Job
+cd $1
+python $1/helperdir/multiple_processes_contamination_R_new.py $1 $2 $3 $4
