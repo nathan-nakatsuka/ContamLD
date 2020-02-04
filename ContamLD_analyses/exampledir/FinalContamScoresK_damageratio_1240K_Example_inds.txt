@@ -1,0 +1,3 @@
+Sample_ID	ContamLD_DamCorr_Estimate	ContamLD_DamCorr_Estimate_se	K_score	K_score_se	Damage_Ratio	Panel	Panel_Type	Warnings
+I7210_I10895_0.040	0.039	0.005	0.067	0.008	0.048034415362937	CEU	1240K	None
+I7278_I10895_0.040	0.04	0.004	0.058	0.009	0.048068667307422	GBR	1240K	None
