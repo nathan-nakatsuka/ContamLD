@@ -1,11 +1,12 @@
 #!/bin/python
 """
 This tool converts data in eigenstrat format in to readdepth format. Note that when possible, 
-we recommend instead generating readdepth files directly from the bams
+we recommend instead generating readdepth files directly from the bams.
 
-Use the -d flag when using diploid data. Otherwise pseudohaploid data is assumed 
+Use the -d flag when using diploid data. Otherwise pseudohaploid data is assumed.
 
-usage: genreaddepth.py [-d] filename 
+usage: eig2readdepth.py [-d] filename 
+filename is the prefix to .snp, .geno, .ind files.
 """
 import numpy as np
 import argparse
