@@ -21,11 +21,11 @@ args1=as.character(files[s,1])
 args3=as.character(files[s,2])
 setwd(paste(args[1],"/directories/",args1,"_jackknife",sep=""))
 
-jinfile=read.table(paste(args1,"_fullreadpairs.jin",sep=""),header=F)
+jinfile=read.table(paste(args1,"_",args3,"_",args[3],"panel_fullreadpairs.jin",sep=""),header=F)
 jinfile[,3]=0
 jinfile2=jinfile
 
-damageratio=read.table(paste(args1,"_damageratio.txt",sep=""),header=F)
+damageratio=read.table(paste(args1,"_",args3,"_",args[3],"panel_damageratio.txt",sep=""),header=F)
 
 j=1
 d=damageratio[(j+1),2]
@@ -34,9 +34,9 @@ BigTable[,3]=round(BigTable[,1]+BigTable[,2],digits=4)
 ## All possible alpha/2+k values
 BigTable[,4]=round(BigTable[,1]/2+BigTable[,2],digits=4)
 
-TableA = read.table(paste(args1,"_UU_",args3,"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
-TableB = read.table(paste(args1,"_DU_",args3,"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
-TableC = read.table(paste(args1,"_DD_",args3,"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
+TableA = read.table(paste(args1,"_UU_",args3,"_",args[3],"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
+TableB = read.table(paste(args1,"_DU_",args3,"_",args[3],"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
+TableC = read.table(paste(args1,"_DD_",args3,"_",args[3],"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
 
 ## Get log likelihoods of A(alpha+k) table (UU pairs)
 BigTable[,5]=TableA[match(as.numeric(BigTable[,3]),as.numeric(TableA[,1])),2]
@@ -73,9 +73,9 @@ jinfile[j,3]=BigTable2[which.max(BigTable2[,8]),1]*d
 jinfile2[j,3]=BigTable2[which.max(BigTable2[,8]),2]
 
 for(j in 2:22){
-TableA = read.table(paste(args1,"_UU_",args3,"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
-TableB = read.table(paste(args1,"_DU_",args3,"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
-TableC = read.table(paste(args1,"_DD_",args3,"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
+TableA = read.table(paste(args1,"_UU_",args3,"_",args[3],"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
+TableB = read.table(paste(args1,"_DU_",args3,"_",args[3],"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
+TableC = read.table(paste(args1,"_DD_",args3,"_",args[3],"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
 
 ## Get log likelihoods of A(alpha+k) table (UU pairs)
 BigTable2[,5]=TableA[match(as.numeric(BigTable2[,3]),as.numeric(TableA[,1])),2]
@@ -90,30 +90,30 @@ jinfile[j,3]=BigTable2[which.max(BigTable2[,8]),1]*d
 jinfile2[j,3]=BigTable2[which.max(BigTable2[,8]),2]
 }
 ## make jin files for the particular contamination level.
-writejin <- file(paste(args1,"_",args3,"panel_scores_reads_DamCorr.jin",sep=""),"w")
+writejin <- file(paste(args1,"_",args3,"_",args[3],"panel_scores_reads_DamCorr.jin",sep=""),"w")
 write.table(jinfile,writejin,sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
 flush(writejin)
 close(writejin)
-writejin2 <- file(paste(args1,"_",args3,"panel_kscores_reads_DamCorr.jin",sep=""),"w")
+writejin2 <- file(paste(args1,"_",args3,"_",args[3],"panel_kscores_reads_DamCorr.jin",sep=""),"w")
 write.table(jinfile2,writejin2,sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
 flush(writejin2)
 close(writejin2)
 num=mean(jinfile[,3])
-writenum <- file(paste(args1,"_",args3,"panel_scores_reads_DamCorr_meanscore2.txt",sep=""),"w")
+writenum <- file(paste(args1,"_",args3,"_",args[3],"panel_scores_reads_DamCorr_meanscore2.txt",sep=""),"w")
 write.table(num,writenum,sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
 flush(writenum)
 close(writenum)
 num=mean(jinfile2[,3])
-writenum2 <- file(paste(args1,"_",args3,"panel_kscores_reads_DamCorr_meanscore2.txt",sep=""),"w")
+writenum2 <- file(paste(args1,"_",args3,"_",args[3],"panel_kscores_reads_DamCorr_meanscore2.txt",sep=""),"w")
 write.table(num,writenum2,sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
 flush(writenum2)
 close(writenum2)
 
 ### Get meanscores
 j=0
-TableA = read.table(paste(args1,"_UU_",args3,"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
-TableB = read.table(paste(args1,"_DU_",args3,"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
-TableC = read.table(paste(args1,"_DD_",args3,"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
+TableA = read.table(paste(args1,"_UU_",args3,"_",args[3],"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
+TableB = read.table(paste(args1,"_DU_",args3,"_",args[3],"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
+TableC = read.table(paste(args1,"_DD_",args3,"_",args[3],"panel_1ind_noChr",j,"_alphatable_fullreads.txt",sep=""),header=F)
 
 ## Get log likelihoods of A(alpha+k) table (UU pairs)
 BigTable2[,5]=TableA[match(as.numeric(BigTable2[,3]),as.numeric(TableA[,1])),2]
@@ -126,11 +126,11 @@ BigTable2[,8]=BigTable2[,5]+BigTable2[,6]+BigTable2[,7]
 alphascore=BigTable2[which.max(BigTable2[,8]),1]
 kscore=BigTable2[which.max(BigTable2[,8]),2]
 
-writealpha <- file(paste(args1,"_",args3,"panel_scores_reads_DamCorr_meanscore.txt",sep=""),"w")
+writealpha <- file(paste(args1,"_",args3,"_",args[3],"panel_scores_reads_DamCorr_meanscore.txt",sep=""),"w")
 write.table(alphascore,writealpha,sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
 flush(writealpha)
 close(writealpha)
-writek <- file(paste(args1,"_",args3,"panel_kscores_reads_DamCorr_meanscore.txt",sep=""),"w")
+writek <- file(paste(args1,"_",args3,"_",args[3],"panel_kscores_reads_DamCorr_meanscore.txt",sep=""),"w")
 write.table(kscore,writek,sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
 flush(writek)
 close(writek)
