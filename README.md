@@ -5,8 +5,9 @@ ContamLD is a software is designed to estimate autosomal contamination in ancien
 **Citation:**  Nakatsuka, N.\*; Harney, E.\*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. "Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium." BioRxiv.<br/>
 <br/>
 **Contact:** Nathan Nakatsuka: nathan_nakatsuka@hms.harvard.edu
-
-### <p>Steps for use:</p>
+<br/>
+<br/>
+## <p>Steps for use:</p>
 ### <p>Section 1)  Pre-processing steps:</p>
 #### Part 1)  Download panels<br/>
 Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD<br/>
@@ -51,11 +52,11 @@ done < directory_files/Prefix_inds.txt
 ```
 
 ### <p>Section 3) Post-processing</p>
-Note: The script will automatically do both the damage correction and the external correction version. Set External Correction value to the external correction score of on an uncontaminated individual of the same group as your target individual.<br/>
+Note: The script will automatically do both the damage correction and the external correction version. Set "External_Correction_Value" to the external correction score of on an uncontaminated individual of the same group as your target individual. Panel_Type is the type of panel: 1240K, SG, or your own.<br/>
 Note: The first time this script is run, sometimes it has an error because the files are not yet finished before they are needed for another script. If this happens, re-run the script.<br/>
 ```
 cd directory_orig
-bash ./helperdir/Post_Processing_New.txt directory_orig directory_files Prefix_inds.txt External_Correction_Value
+bash ./helperdir/Post_Processing_New.txt directory_orig directory_files Prefix_inds.txt External_Correction_Value Panel_Type
 ```
 
 
