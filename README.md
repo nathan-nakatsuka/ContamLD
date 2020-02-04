@@ -12,15 +12,15 @@ ContamLD is a software is designed to estimate autosomal contamination in ancien
 #### Part 1)  Download panels or prepare your own panels.<br/>
 Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD<br/>
 Note: In most cases you should download the 1240K panels. If you have low coverage (<0.5X) whole-genome shotgun sequences, then you can try the SG_panels for improved power at the expense of significantly increased running time and memory requirements.<br/>
-Step 2) Put the panels in the panels folder where the helperdir folder also is located (referred to as "directory_orig" below).
+Step 2) Put the panels in the "panels" folder where the "helperdir" folder also is located (referred to as "directory_orig" below).
 
 Note: If you have a SNP set that is very different than the 1240k SNP set or whole-genome shotgun set then follow steps in PreProcessing folder to make your own panel.
 
 
 #### Part 2) Pull down reads onto SNP set.<br/>
 Step 1)  Use pulldown in PreProcessing folder on BAM files to obtain individual readdepth files for all reads and only damaged reads for each sample. <br/>	
-Note:  Input data must contain only a single individual. It is possible to pull out all data from a single individual from a readdefth file containing multiple individuals using the grep function.<br/>
-Step 2)  Name them IndName_All.readdepth and IndName_dam.readdepth (IndName is the name of that individual, same as Sample_ID below. IndName_All.readdepth is the file corresponding to all reads, and IndName_dam.readdepth is the file corresponding to only damaged reads.).<br/>
+Note:  Input data must contain only a single individual. It is possible to pull out all data from a single individual from a readdepth file containing multiple individuals using the grep function.<br/>
+Step 2)  Name them IndName_All.readdepth and IndName_dam.readdepth (IndName is the name of that particular individual. IndName_All.readdepth is the file corresponding to all reads, and IndName_dam.readdepth is the file corresponding to only damaged reads for that individual.).<br/>
 
 Optional) If you have eigenstrat files and are unable to pull down read information from bams, use the eig2readdepth.py script in the PreProcessing folder to transform eigenstrat files to readdepth files.<br/>
 (Note: this has less power than the read based method because it ignores reads that map to the same site)<br/>
@@ -68,7 +68,7 @@ Note: The script will automatically do both the damage correction and the extern
 Note: The first time this script is run, sometimes it has an error because the files are not yet finished before they are needed for another script. If this happens, re-run the script. If it does not work the second time, then something went wrong upstream of this.<br/>
 ```
 cd directory_orig
-bash ./helperdir/Post_Processing_New.txt directory_orig directory_files GroupName_inds.txt External_Correction_Value Panel_Type
+bash directory_orig/helperdir/Post_Processing_New.txt directory_orig directory_files GroupName_inds.txt External_Correction_Value Panel_Type
 ```
 
 
@@ -78,11 +78,11 @@ If the warning "Model_Misspecified" shows up, this usually means the coverage is
 
 
 **Example to test:**<br/>
-There is an example to test in the folder exampledir. These are 2 samples (I7210 and I7278) with 0.04 contamination from an ancient West Eurasian (I10895).<br/>
+There is an example to test in the folder "exampledir". These are 2 samples (I7210 and I7278) with 0.04 contamination from an ancient West Eurasian (I10895).<br/>
 If you run these samples with the Example_inds.txt file, you should get approximately the following estimates:<br/>
 I7210:  0.039<br/>
 I7278:  0.040
 
-The files that should be generated are in the directories folder in the exampledir. To test if it is running properly for you, move these files to another location and see if the files you generate are approximately the same as these files.
+The files that should be generated are in the "directories" folder in the "exampledir" folder. To test if ContamLD is running properly for you, move these files to another location and see if the files you generate are approximately the same as these files.
 
 
