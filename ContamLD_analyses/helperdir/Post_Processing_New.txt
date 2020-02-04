@@ -1,0 +1,11 @@
+#!/bin/bash
+
+## Post-processing steps (make a table with all samples' values)
+Rscript $1/helperdir/makejinfiles_DamCorr_New.R $2 $3 $5
+bash $1/helperdir/getjackknifeses_DamCorr.sh $1 $2 $3 $5
+Rscript $1/helperdir/getfinalscores_DamCorr.R $2 $3 $5
+
+# Post-processing for external correction.
+Rscript $1/helperdir/makejinfiles_ExtCorr_New.R $2 $3 $5
+bash $1/helperdir/getjackknifeses_ExtCorr.sh $1 $2 $3 $5
+Rscript $1/helperdir/getfinalscores_ExtCorr.R $2 $3 $4 $5
