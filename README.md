@@ -2,12 +2,12 @@
 
 ContamLD is a software is designed to estimate autosomal contamination in ancient DNA samples.
 
-**Citation:**  Nakatsuka, N.\*; Harney, E.\*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. \?Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium.\? BioRxiv.
+**Citation:**  Nakatsuka, N.\*; Harney, E.\*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. "Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium." BioRxiv.
 
-#### <p>Steps for use:</p>
-<p>Section 1)  Pre-processing steps:</p>
-Part 1)  Download panels 
-	Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD/
+### <p>Steps for use:</p>
+####<p>Section 1)  Pre-processing steps:</p>
+Part 1)  Download panels<br/>
+	Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD<br/>
 		Note: In most cases you should download the 1240K panels. If you have low coverage (<0.5X) whole-genome shotgun sequences, then you can try the SG_panels for improved power at the expense of significantly increased running time and memory requirements.
 	Step 2) Put the panels in the same folder (referred to as "directory_orig" below) that you have the helperdir folder in.
 
@@ -46,10 +46,12 @@ Sample_ID_3 1000Genomes_Pop_closesttoSample3
 where 1000Genomes_Pop is the closest population to the sample.
 Note: Guessing on this step is okay as long as the sample is within continental ancestry variation of the 1000 Genomes population.
 
-Section 2:  Run Contamination Estimate: (run this with 3 cores if using a cluster)
--In the following notation: directory_orig is the directory with helperdir and panels; directory_files is the directory where your .readdepth and Prefix_inds.txt are
+####<p>Section 2:  Run Contamination Estimate:</p>
+Note: Run this with 3 cores if possible.<br/>
+-In the following notation: directory_orig is the directory with helperdir and panels; directory_files is the directory where your .readdepth and Prefix_inds.txt are.<br/>
 
-Step 1) Run the following, where directory_files is the directory your files are in, directory_orig is the directory where the helperdir and panels are:
+#####Step 1) Run the following, where directory_files is the directory your files are in, directory_orig is the directory where the helperdir and panels are:<br/>
+'''
 cd directory_files
 mkdir -p directories
 cd directory_orig
@@ -58,26 +60,27 @@ cd directory_orig
 while read sampleID panel; do
 bash ./helperdir/Contamination_Analysis.txt directory_orig directory_files ${sampleID} ${panel}
 done < directory_files/Prefix_inds.txt
+'''
 
-
-Section 3) Post-processing
-Note: The script will automatically do both the damage correction and the external correction version. Set External Correction value to the external correction score of on an uncontaminated individual of the same group as your target individual.
-Note: The first time this script is run, sometimes it has an error because the files are not yet finished before they are needed for another script. If this happens, re-run the script.
-
+####<p>Section 3) Post-processing</p>
+Note: The script will automatically do both the damage correction and the external correction version. Set External Correction value to the external correction score of on an uncontaminated individual of the same group as your target individual.<br/>
+Note: The first time this script is run, sometimes it has an error because the files are not yet finished before they are needed for another script. If this happens, re-run the script.<br/>
+'''
 cd directory_orig
 bash ./helperdir/Post_Processing_New.txt directory_orig directory_files Prefix_inds.txt External_Correction_Value
+'''
 
 
-Examining the Output of samples:
-The file of interest will be in the directory "directory_files" and will be named "FinalContamScoresK_damageratio_Prefix_inds.txt"
-If the warning "Model_Misspecified" shows up, this usually means the coverage is very low and the estimate might not be reliable.
+Examining the Output of samples:<br/>
+The file of interest will be in the directory "directory_files" and will be named "FinalContamScoresK_damageratio_Prefix_inds.txt"<br/>
+If the warning "Model_Misspecified" shows up, this usually means the coverage is very low and the estimate might not be reliable.<br/>
 The warning "Very_High_Contamination" sometimes comes up even if there is low contamination if there is contamination from another ancient source or the panel is very diverged from the ancestry of the target individual (e.g. this occurs with most Native American individuals and some African groups).
 
 
-Example to test:
-There is an example to test in the folder exampledir. These are 2 samples (I7210 and I7278) with 0.04 contamination from an ancient West Eurasian (I10895).
-If you run these samples with the Example_inds.txt file, you should get approximately the following estimates:
-I7210:  0.039
+Example to test:<br/>
+There is an example to test in the folder exampledir. These are 2 samples (I7210 and I7278) with 0.04 contamination from an ancient West Eurasian (I10895).<br/>
+If you run these samples with the Example_inds.txt file, you should get approximately the following estimates:<br/>
+I7210:  0.039<br/>
 I7278:  0.040
 
 The files that should be generated are in the directories folder in the exampledir. To test if it is running properly for you, move these files to another location and see if the files you generate are approximately the same as these files.
