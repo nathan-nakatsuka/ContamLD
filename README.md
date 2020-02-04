@@ -51,7 +51,7 @@ bash ./helperdir/ContamLD_RunningScript.txt directory_orig directory_files ${sam
 done < directory_files/Prefix_inds.txt
 ```
 <br/>
-<br/>
+
 ### <p>Section 3) Post-processing</p>
 Note: The script will automatically do both the damage correction and the external correction version. Set "External_Correction_Value" to the external correction score of on an uncontaminated individual of the same group as your target individual. Panel_Type is the type of panel: 1240K, SG, or your own.<br/>
 Note: The first time this script is run, sometimes it has an error because the files are not yet finished before they are needed for another script. If this happens, re-run the script.<br/>
