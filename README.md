@@ -2,10 +2,10 @@
 
 ContamLD is a software is designed to estimate autosomal contamination in ancient DNA samples.
 
-Citation:  Nakatsuka, N.*; Harney, E.*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. ?Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium.? BioRxiv.
+**Citation:**  Nakatsuka, N.\*; Harney, E.\*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. \?Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium.\? BioRxiv.
 
-**Steps for use:**
-Section 1)  Pre-processing steps:
+#### <p>Steps for use:</p>
+<p>Section 1)  Pre-processing steps:</p>
 Part 1)  Download panels 
 	Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD/
 		Note: In most cases you should download the 1240K panels. If you have low coverage (<0.5X) whole-genome shotgun sequences, then you can try the SG_panels for improved power at the expense of significantly increased running time and memory requirements.
@@ -28,12 +28,12 @@ Part 2) Pull down reads onto SNP set.
 	Name them Prefix_All.readdepth and Prefix_dam.readdepth
 	(Prefix is the name of your file, same as Sample_ID below)
 
-Optional) If you have eigenstrat files and are unable to pull down read information from bams, use this script to transform eigenstrat files to readdepth files:
+Optional) If you have eigenstrat files and are unable to pull down read information from bams, use the eig2readdepth.py script in the PreProcessing folder to transform eigenstrat files to readdepth files:
 (Note: this has less power than the read based method because it ignores reads that map to the same site)
-Put files in the format: Prefix.snp, Prefix.ind, Prefix.eigenstratgeno and damaged reads: Prefix_dam.snp, Prefix_dam.ind, Prefix_dam.eigenstratgeno
-Use this file for eigenstrat format files in pseudo-haploid format (one read chosen to represent the genotype either 0=ALT or 2=REF; no heterozygotes) .
+Put files in the format: Prefix.snp, Prefix.ind, Prefix.geno and damaged reads: Prefix_dam.snp, Prefix_dam.ind, Prefix_dam.geno
+Use this file for eigenstrat format files in pseudo-haploid format (one read chosen to represent the genotype either 0=ALT or 2=REF; no heterozygotes). If you have diploid data with heterozygotes, use -d flag.
 
-python eig2readdepth.py Prefix diploid=False
+python eig2readdepth.py [-d] Prefix
 
 Part 3) Determine what panel the sample is closest to:
 Use ADMIXTOOLS, qp3Pop with statistics of the form f3(outgroup; 1000_GenomesPop, Sample) for all 1000Genomes Populations. Choose the 1000Genomes population with the highest score.
