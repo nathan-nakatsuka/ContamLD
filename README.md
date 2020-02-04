@@ -2,23 +2,23 @@
 
 ContamLD is a software is designed to estimate autosomal contamination in ancient DNA samples.
 
-**Citation:**  Nakatsuka, N.\*; Harney, E.\*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. "Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium." BioRxiv.
+**Citation:**  Nakatsuka, N.\*; Harney, E.\*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. "Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium." BioRxiv.<br/>
+**Contact:** Nathan Nakatsuka: nathan_nakatsuka@hms.harvard.edu
 
 ### <p>Steps for use:</p>
 #### <p>Section 1)  Pre-processing steps:</p>
 ##### Part 1)  Download panels<br/>
-	Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD<br/>
-		Note: In most cases you should download the 1240K panels. If you have low coverage (<0.5X) whole-genome shotgun sequences, then you can try the SG_panels for improved power at the expense of significantly increased running time and memory requirements.<br/>
-	Step 2) Put the panels in the same folder (referred to as "directory_orig" below) that you have the helperdir folder in.
+Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD<br/>
+Note: In most cases you should download the 1240K panels. If you have low coverage (<0.5X) whole-genome shotgun sequences, then you can try the SG_panels for improved power at the expense of significantly increased running time and memory requirements.<br/>
+Step 2) Put the panels in the same folder (referred to as "directory_orig" below) that you have the helperdir folder in.
 
 Note: If you have a SNP set that is very different than the 1240k SNP set or whole-genome shotgun set then follow steps in PreProcessing folder to make your own panel.
 
 
 ##### Part 2) Pull down reads onto SNP set.<br/>
-	Step 1)  Obtain individual readdepth files for damaged or undamaged reads for each sample.  (Could also use genotype call information)<br/>
-	Note:  This should be done using a pulldown on bam files. (See separate note on pulldown; you will need to grep out each sample from the full readdepth file).<br/>
-	Name them Prefix_All.readdepth and Prefix_dam.readdepth
-	(Prefix is the name of your file, same as Sample_ID below)
+Step 1)  Obtain individual readdepth files for damaged or undamaged reads for each sample.  (Could also use genotype call information)<br/>	Note:  This should be done using a pulldown on bam files. (See separate note on pulldown; you will need to grep out each sample from the full readdepth file).<br/>
+Name them Prefix_All.readdepth and Prefix_dam.readdepth
+(Prefix is the name of your file, same as Sample_ID below)
 
 Optional) If you have eigenstrat files and are unable to pull down read information from bams, use the eig2readdepth.py script in the PreProcessing folder to transform eigenstrat files to readdepth files:
 (Note: this has less power than the read based method because it ignores reads that map to the same site)<br/>
