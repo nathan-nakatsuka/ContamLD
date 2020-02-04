@@ -8,8 +8,8 @@ ContamLD is a software is designed to estimate autosomal contamination in ancien
 <br/>
 <br/>
 ## <p>Steps for use:</p>
-### <p>Section 1)  Pre-processing steps:</p>
-#### Part 1)  Download panels<br/>
+### <p>Section 1)  Pre-processing steps</p>
+#### Part 1)  Download panels.<br/>
 Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD<br/>
 Note: In most cases you should download the 1240K panels. If you have low coverage (<0.5X) whole-genome shotgun sequences, then you can try the SG_panels for improved power at the expense of significantly increased running time and memory requirements.<br/>
 Step 2) Put the panels in the same folder that you have the helperdir folder in (referred to as "directory_orig" below).
@@ -31,7 +31,7 @@ python eig2readdepth.py [-d] Prefix
 ```
 
 
-#### Part 3) Determine what panel the target individual is genetically closest to:<br/>
+#### Part 3) Determine what panel the target individual is genetically closest to.<br/>
 Use outgroupf3.R script in PreProcessing folder to run outgroupf3 statistics to determine which panel is genetically closest to the target individual.<br/>
 Note: Guessing on this step is okay as long as the sample is within continental ancestry variation of the 1000 Genomes population.
 <br/>
