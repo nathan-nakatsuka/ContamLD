@@ -1,10 +1,10 @@
 # ContamLD
 
-This software is designed to estimate autosomal contamination in ancient DNA samples.
+ContamLD is a software is designed to estimate autosomal contamination in ancient DNA samples.
 
-Citation:  
+Citation:  Nakatsuka, N.*; Harney, E.*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. ?Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium.? BioRxiv.
 
-Steps for use:
+**Steps for use:**
 Section 1)  Pre-processing steps:
 Part 1)  Download panels 
 	Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD/
@@ -25,8 +25,8 @@ Part 1opt)  Instructions for making panel:
 Part 2) Pull down reads onto SNP set.
 	Step 1)  Attain individual readdepth files for damaged or undamaged reads for each sample.  (Could also use genotype call information)
 	Note:  This should be done using a pulldown on bam files. (See separate note on pulldown; you will need to grep out each sample from the full readdepth file).
-	Name them *_All.readdepth and *_dam.readdepth
-	(* is the name of your file, same as Sample_ID below)
+	Name them Prefix_All.readdepth and Prefix_dam.readdepth
+	(Prefix is the name of your file, same as Sample_ID below)
 
 Optional) If you have eigenstrat files and are unable to pull down read information from bams, use this script to transform eigenstrat files to readdepth files:
 (Note: this has less power than the read based method because it ignores reads that map to the same site)
