@@ -9,7 +9,7 @@ ContamLD is a software is designed to estimate autosomal contamination in ancien
 <br/>
 ## <p>Steps for use:</p>
 ### <p>Section 1)  Pre-processing steps</p>
-#### Part 1)  Download panels.<br/>
+#### Part 1)  Download panels or prepare your own panels.<br/>
 Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD<br/>
 Note: In most cases you should download the 1240K panels. If you have low coverage (<0.5X) whole-genome shotgun sequences, then you can try the SG_panels for improved power at the expense of significantly increased running time and memory requirements.<br/>
 Step 2) Put the panels in the same folder that you have the helperdir folder in (referred to as "directory_orig" below).
@@ -18,9 +18,9 @@ Note: If you have a SNP set that is very different than the 1240k SNP set or who
 
 
 #### Part 2) Pull down reads onto SNP set.<br/>
-Step 1)  Use pulldown in PreProcessing folder on BAM files to obtain individual readdepth files for damaged or undamaged reads for each sample. <br/>	
-Note:  You will need to grep out each sample from the full readdepth file.<br/>
-Step 2)  Name them Prefix_All.readdepth and Prefix_dam.readdepth (Prefix is the name of your file, same as Sample_ID below).
+Step 1)  Use pulldown in PreProcessing folder on BAM files to obtain individual readdepth files for all reads and only damaged reads for each sample. <br/>	
+Note:  Input data must contain only a single individual. It is possible to pull out all data from a single individual from a readdefth file containing multiple individuals using the grep function.<br/>
+Step 2)  Name them Prefix_All.readdepth and Prefix_dam.readdepth (Prefix is the name of your file, same as Sample_ID below. Prefix_All.readdepth is the file corresponding to all reads, and Prefix_dam.readdepth is the file corresponding to only damaged reads.).<br/>
 
 Optional) If you have eigenstrat files and are unable to pull down read information from bams, use the eig2readdepth.py script in the PreProcessing folder to transform eigenstrat files to readdepth files.<br/>
 (Note: this has less power than the read based method because it ignores reads that map to the same site)<br/>
@@ -35,10 +35,19 @@ python eig2readdepth.py [-d] Prefix
 Use outgroupf3.R script in PreProcessing folder to run outgroupf3 statistics to determine which panel is genetically closest to the target individual.<br/>
 Note: Guessing on this step is okay as long as the sample is within continental ancestry variation of the 1000 Genomes population.
 <br/>
+
+#### Part 4) Create a file with the names of all individuals and their corresponding panels.<br/>
+Create file called "Prefix_inds.txt" in the following format, where the 1000Genomes population is determined from Section 1 Part 3, and put it in same directory as readdepth files:<br/>
+Sample_ID_1 1000Genomes_Pop_closesttoSample1<br/>
+Sample_ID_2 1000Genomes_Pop_closesttoSample2<br/>
+Sample_ID_3 1000Genomes_Pop_closesttoSample3<br/>
 <br/>
+<br/>
+
 ### <p>Section 2)  Run Contamination Estimate</p>
+After you have readdepth files, the panels (placed in the panels folder), and the Prefix_inds.txt file, run ContamLD.
 Note: Run this with 3 cores if possible.<br/>
--In the following notation: "directory_orig" is the directory with helperdir and panels; "directory_files" is the directory where your .readdepth and Prefix_inds.txt are.<br/>
+-In the following notation: "directory_orig" is the directory with helperdir and panels folders are; "directory_files" is the directory where your .readdepth and Prefix_inds.txt are.<br/>
 
 Run the following:<br/>
 ```
@@ -54,7 +63,8 @@ done < directory_files/Prefix_inds.txt
 <br/>
 
 ### <p>Section 3) Post-processing</p>
-Note: The script will automatically do both the damage correction and the external correction version. Set "External_Correction_Value" to the external correction score of on an uncontaminated individual of the same group as your target individual. Panel_Type is the type of panel: 1240K, SG, or your own.<br/>
+After ContamLD is run, the final values and standard errors are obtained with this script.
+Note: The script will automatically do both the damage correction and the external correction version. Set "External_Correction_Value" to the external correction score of on an uncontaminated individual of the same group as your target individual. If you do not have this, set the score to 0. Panel_Type is the type of panel: 1240K, SG, or your own.<br/>
 Note: The first time this script is run, sometimes it has an error because the files are not yet finished before they are needed for another script. If this happens, re-run the script. If it does not work the second time, then something went wrong upstream of this.<br/>
 ```
 cd directory_orig
