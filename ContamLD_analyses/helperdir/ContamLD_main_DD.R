@@ -5,11 +5,11 @@ options(scipen=999)
 setwd(paste(args[2],"/directories/",args[3],"_jackknife",sep=""))
 
 ### snpfile must be in Chr, pos, readdepth#1, readdepth#2 format. (All Hg19)
-snpfile=read.table(paste(args[3],"_reads_107k_D.txt",sep=""),header=F)
+snpfile=read.table(paste(args[3],"_reads_",args[4],"panel_",args[5],"_D.txt",sep=""),header=F)
 
-SNPfreq_panel=read.table(gzfile(paste(args[1],"/panels/",args[4],"_snpfreqs_heldout_noX.txt.gz",sep="")),header=T,stringsAsFactors=F)
+SNPfreq_panel=read.table(gzfile(paste(args[1],"/panels/",args[4],"_",args[5],"_snpfreqs_heldout_noX.txt.gz",sep="")),header=T,stringsAsFactors=F)
 ### These are the positions used to make the SNPfreq_panel and HaplotypeFreq_panel files.
-SNPfreq_panel_snpfile=read.table(gzfile(paste(args[1],"/panels/",args[4],"_eig_heldout_noX_ChromPos.snp.gz",sep="")),header=F,stringsAsFactors=F)
+SNPfreq_panel_snpfile=read.table(gzfile(paste(args[1],"/panels/",args[4],"_",args[5],"_eig_heldout_noX_ChromPos.snp.gz",sep="")),header=F,stringsAsFactors=F)
 
 #### Intersect the SNPfreq_snpfile and snpfile to only get the places where they match. (if the input snpfile is different from the file used to make the SNPfreq_panel file).
 ### Concatenate chromosome and position for intersection.
@@ -23,14 +23,14 @@ SNPfreq_panel_snpfile=data.frame(SNPfreq_panel_snpfile)
 snpfile=snpfile[(snpfile[,5] %in% SNPfreq_panel_snpfile[,1]),]
 
 ### Find the matches of SNP pairs of snpfile in LDfile (will be used to search in HaplotypeFreq_panel also)
-LDfile = read.table(gzfile(paste(args[1],"/panels/",args[4],"_eig_heldout_noX.ld.gz",sep="")),header=T)
+LDfile = read.table(gzfile(paste(args[1],"/panels/",args[4],"_",args[5],"_eig_heldout_noX.ld.gz",sep="")),header=T)
 ### Keep the chromosome number for later (jackknife resampling)
 LDfile[,8]=LDfile[,1]
 ### Concatenate chromosome and position for intersection.
 LDfile[,9]=paste(LDfile[,1],"-",LDfile[,2],sep="") 
 LDfile[,10]=paste(LDfile[,4],"-",LDfile[,5],sep="") 
 
-HaplotypeFreq_panel=read.table(gzfile(paste(args[1],"/panels/",args[4],"_haplotypefreqs_heldout_noX.txt.gz",sep="")),header=T,stringsAsFactors=F,colClasses="character")
+HaplotypeFreq_panel=read.table(gzfile(paste(args[1],"/panels/",args[4],"_",args[5],"_haplotypefreqs_heldout_noX.txt.gz",sep="")),header=T,stringsAsFactors=F,colClasses="character")
 
 ### Goal:  Narrow down LDfile and HaplotypeFreq_panel to the places where it matches snpfile
 HaplotypeFreq_panel=HaplotypeFreq_panel[((LDfile[,9] %in% snpfile[,5]) & (LDfile[,10] %in% snpfile[,5])),]
@@ -355,8 +355,8 @@ Table5[,1]=seq(-0.1,0.5,by=0.0001)
 Table5[,2]=rowSums(Table4)
 # First round is with no chromosomes removed
 top=Table5[which.max(Table5[,2]),]
-write.table(Table5,file=paste(args[3],"_DD_",args[4],"panel_1ind_noChr","0","_alphatable_fullreads.txt",sep=""),sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
-write.table(top,file=paste(args[3],"_DD_",args[4],"panel_1ind_noChr","0","_topscore_fullreads.txt",sep=""),sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
+write.table(Table5,file=paste(args[3],"_DD_",args[4],"_",args[5],"panel_1ind_noChr","0","_alphatable_fullreads.txt",sep=""),sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
+write.table(top,file=paste(args[3],"_DD_",args[4],"_",args[5],"panel_1ind_noChr","0","_topscore_fullreads.txt",sep=""),sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
 
 ### Remove chromosomes one at a time for jackknife.
 for(f in 1:22){
@@ -364,6 +364,6 @@ temp=Table4
 temp[,f]=NULL
 Table5[,2]=rowSums(temp)
 top=Table5[which.max(Table5[,2]),]
-write.table(Table5,file=paste(args[3],"_DD_",args[4],"panel_1ind_noChr",f,"_alphatable_fullreads.txt",sep=""),sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
-write.table(top,file=paste(args[3],"_DD_",args[4],"panel_1ind_noChr",f,"_topscore_fullreads.txt",sep=""),sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
+write.table(Table5,file=paste(args[3],"_DD_",args[4],"_",args[5],"panel_1ind_noChr",f,"_alphatable_fullreads.txt",sep=""),sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
+write.table(top,file=paste(args[3],"_DD_",args[4],"_",args[5],"panel_1ind_noChr",f,"_topscore_fullreads.txt",sep=""),sep="\t",quote=FALSE,col.names=FALSE,row.names=FALSE)
 }
