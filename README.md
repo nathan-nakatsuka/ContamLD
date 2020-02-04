@@ -12,7 +12,7 @@ ContamLD is a software is designed to estimate autosomal contamination in ancien
 #### Part 1)  Download panels or prepare your own panels.<br/>
 Step 1) Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD<br/>
 Note: In most cases you should download the 1240K panels. If you have low coverage (<0.5X) whole-genome shotgun sequences, then you can try the SG_panels for improved power at the expense of significantly increased running time and memory requirements.<br/>
-Step 2) Put the panels in the same folder that you have the helperdir folder in (referred to as "directory_orig" below).
+Step 2) Put the panels in the panels folder where the helperdir folder also is located (referred to as "directory_orig" below).
 
 Note: If you have a SNP set that is very different than the 1240k SNP set or whole-genome shotgun set then follow steps in PreProcessing folder to make your own panel.
 
