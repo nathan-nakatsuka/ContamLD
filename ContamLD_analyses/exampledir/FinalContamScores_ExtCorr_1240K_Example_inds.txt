@@ -1,0 +1,3 @@
+Sample_ID	ContamLD_ExtCorr_Estimate	ContamLD_ExtCorr_Estimate_se	Panel	Panel_Type
+I7210_I10895_0.040	0.106	0.008	CEU	1240K
+I7278_I10895_0.040	0.098	0.009	GBR	1240K
