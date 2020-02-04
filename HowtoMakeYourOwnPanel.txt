@@ -1,0 +1,10 @@
+Note: If you have a SNP set that is very different than the 1240k SNP set or whole-genome shotgun set then follow steps below and make panels (takes ~24 hours or more if the panels are larger than the 1240K panels).
+Instructions for making panel:
+	Step 1)  Get 1000 Genomes files with SNP positions corresponding to your dataset's SNPs.
+	Step 2)  Convert 1000 Genomes files to eigenstrat format with the following endings: ${panel}.snp, ${panel}.eigenstratgeno, where ${panel} is the name of the 1000 Genomes population.
+	Step 3)  Convert 1000 Genomes files to packedped format (.bed, .bim, .fam) and use plink2 to find all SNP pairs with high LD (e.g. r^2 > 0.2): plink2 --bfile prefix --r2 --out prefix
+		Note: If you want to increase power marginally at the expense of increased computational time, set the r2 value less than 0.2 by using --ld-window-r2
+	Step 4)  Use the following script to get the panels (directory_files is the directory where the .ld, .snp, and .eigenstratgeno files are, ${panel} is the name of the 1000 Genomes Population, ${panel_type} is the type of panel (name it something then keep that name for all subsequent analyses and replace 1240K with that name):
+	Rscript Get_Haplotype_and_SNPfreqs_new.R directory_files ${panel} ${panel_type}
+	Step 5) awk '{print $2 "-" $4}' ${panel}_${panel_type}_eig_heldout_noX.snp > ${panel}_${panel_type}_eig_heldout_noX_ChromPos.snp
+	Step 6) gzip all of the panels.
