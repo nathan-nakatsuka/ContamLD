@@ -20,7 +20,7 @@ Note: If you have a SNP set that is very different than the 1240k SNP set or who
 #### Part 2) Pull down reads onto SNP set.<br/>
 Step 1)  Use pulldown in PreProcessing folder on BAM files to obtain individual readdepth files for all reads and only damaged reads for each sample. <br/>	
 Note:  Input data must contain only a single individual. It is possible to pull out all data from a single individual from a readdefth file containing multiple individuals using the grep function.<br/>
-Step 2)  Name them Prefix_All.readdepth and Prefix_dam.readdepth (Prefix is the name of your file, same as Sample_ID below. Prefix_All.readdepth is the file corresponding to all reads, and Prefix_dam.readdepth is the file corresponding to only damaged reads.).<br/>
+Step 2)  Name them IndName_All.readdepth and IndName_dam.readdepth (IndName is the name of that individual, same as Sample_ID below. IndName_All.readdepth is the file corresponding to all reads, and IndName_dam.readdepth is the file corresponding to only damaged reads.).<br/>
 
 Optional) If you have eigenstrat files and are unable to pull down read information from bams, use the eig2readdepth.py script in the PreProcessing folder to transform eigenstrat files to readdepth files.<br/>
 (Note: this has less power than the read based method because it ignores reads that map to the same site)<br/>
@@ -37,17 +37,17 @@ Note: Guessing on this step is okay as long as the sample is within continental 
 <br/>
 
 #### Part 4) Create a file with the names of all individuals and their corresponding panels.<br/>
-Create file called "Prefix_inds.txt" in the following format, where the 1000Genomes population is determined from Section 1 Part 3, and put it in same directory as readdepth files:<br/>
-Sample_ID_1 1000Genomes_Pop_closesttoSample1<br/>
-Sample_ID_2 1000Genomes_Pop_closesttoSample2<br/>
-Sample_ID_3 1000Genomes_Pop_closesttoSample3<br/>
+Create file called GroupName_inds.txt (where GroupName is the name of your collection of individuals) in the following format, where the 1000Genomes population is determined from Section 1 Part 3, and put it in same directory as the readdepth files:<br/>
+IndName_1 1000Genomes_Pop_closesttoIndName_1<br/>
+IndName_2 1000Genomes_Pop_closesttoIndName_2<br/>
+IndName_3 1000Genomes_Pop_closesttoIndName_3<br/>
 <br/>
 <br/>
 
 ### <p>Section 2)  Run Contamination Estimate</p>
-After you have readdepth files, the panels (placed in the panels folder), and the Prefix_inds.txt file, run ContamLD.
+After you have readdepth files, the panels (placed in the panels folder), and the GroupName_inds.txt file, run ContamLD.<br/>
 Note: Run this with 3 cores if possible.<br/>
--In the following notation: "directory_orig" is the directory with helperdir and panels folders are; "directory_files" is the directory where your .readdepth and Prefix_inds.txt are.<br/>
+-In the following notation: "directory_orig" is the directory with helperdir and panels folders are; "directory_files" is the directory where your .readdepth and GroupName_inds.txt are.<br/>
 
 Run the following:<br/>
 ```
@@ -56,9 +56,9 @@ mkdir -p directories
 cd directory_orig
 
 #!/bin/bash
-while read sampleID panel; do
-bash ./helperdir/ContamLD_RunningScript.txt directory_orig directory_files ${sampleID} ${panel}
-done < directory_files/Prefix_inds.txt
+while read IndName panel; do
+bash ./helperdir/ContamLD_RunningScript.txt directory_orig directory_files ${IndName} ${panel}
+done < directory_files/GroupName_inds.txt
 ```
 <br/>
 
@@ -68,12 +68,12 @@ Note: The script will automatically do both the damage correction and the extern
 Note: The first time this script is run, sometimes it has an error because the files are not yet finished before they are needed for another script. If this happens, re-run the script. If it does not work the second time, then something went wrong upstream of this.<br/>
 ```
 cd directory_orig
-bash ./helperdir/Post_Processing_New.txt directory_orig directory_files Prefix_inds.txt External_Correction_Value Panel_Type
+bash ./helperdir/Post_Processing_New.txt directory_orig directory_files GroupName_inds.txt External_Correction_Value Panel_Type
 ```
 
 
 **Examining the output of ContamLD:**<br/>
-The file of interest will be in the directory "directory_files" and will be named "FinalContamScoresK_damageratio_Prefix_inds.txt"<br/>
+The files of interest will be in the directory "directory_files". The damage restriction corrected estimates will be named "FinalContamScoresK_damageratio_Panel_Type_GroupName_inds.txt". The external correction estimates will be named "FinalContamScores_ExtCorr_Panel_Type_GroupName_inds.txt"<br/>
 If the warning "Model_Misspecified" shows up, this usually means the coverage is very low and the estimate might not be reliable. The warning "Very_High_Contamination" sometimes comes up even if there is low contamination if there is contamination from another ancient source or the panel is very diverged from the ancestry of the target individual (e.g. this occurs with most Native American individuals and some African groups).
 
 
