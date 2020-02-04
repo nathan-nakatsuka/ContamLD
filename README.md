@@ -36,7 +36,7 @@ Use outgroupf3.R script in PreProcessing folder to run outgroupf3 statistics to 
 Note: Guessing on this step is okay as long as the sample is within continental ancestry variation of the 1000 Genomes population.
 <br/>
 <br/>
-### <p>Section 2:  Run Contamination Estimate:</p>
+### <p>Section 2)  Run Contamination Estimate</p>
 Note: Run this with 3 cores if possible.<br/>
 -In the following notation: "directory_orig" is the directory with helperdir and panels; "directory_files" is the directory where your .readdepth and Prefix_inds.txt are.<br/>
 
@@ -55,7 +55,7 @@ done < directory_files/Prefix_inds.txt
 
 ### <p>Section 3) Post-processing</p>
 Note: The script will automatically do both the damage correction and the external correction version. Set "External_Correction_Value" to the external correction score of on an uncontaminated individual of the same group as your target individual. Panel_Type is the type of panel: 1240K, SG, or your own.<br/>
-Note: The first time this script is run, sometimes it has an error because the files are not yet finished before they are needed for another script. If this happens, re-run the script.<br/>
+Note: The first time this script is run, sometimes it has an error because the files are not yet finished before they are needed for another script. If this happens, re-run the script. If it does not work the second time, then something went wrong upstream of this.<br/>
 ```
 cd directory_orig
 bash ./helperdir/Post_Processing_New.txt directory_orig directory_files Prefix_inds.txt External_Correction_Value Panel_Type
