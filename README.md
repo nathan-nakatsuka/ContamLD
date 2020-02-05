@@ -32,12 +32,12 @@ python eig2readdepth.py [-d] Prefix
 
 
 #### Part 3) Determine what panel the target individual is genetically closest to.<br/>
-Use outgroupf3.R script in PreProcessing folder to run outgroupf3 statistics to determine which panel is genetically closest to the target individual.<br/>
+Follow HowtoDetermineClosestPanel_Outgroupf3.txt instructions in the "PreProcessing" folder to run outgroupf3 statistics to determine which panel is genetically closest to the target individual.<br/>
 Note: Guessing on this step is okay as long as the sample is within continental ancestry variation of the 1000 Genomes population.
 <br/>
 
 #### Part 4) Create a file with the names of all individuals and their corresponding panels.<br/>
-Create file called GroupName_inds.txt (where GroupName is the name of your collection of individuals) in the following format, where the 1000Genomes population is determined from Section 1 Part 3, and put it in same directory as the readdepth files:<br/>
+Create file called "GroupName_inds.txt" (where GroupName is the name of your collection of individuals) in the following format, where the 1000Genomes population is determined from Section 1 Part 3, and put it in same directory as the readdepth files:<br/>
 IndName_1 1000Genomes_Pop_closesttoIndName_1<br/>
 IndName_2 1000Genomes_Pop_closesttoIndName_2<br/>
 IndName_3 1000Genomes_Pop_closesttoIndName_3<br/>
