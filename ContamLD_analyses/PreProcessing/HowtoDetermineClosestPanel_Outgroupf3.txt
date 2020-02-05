@@ -1,0 +1,16 @@
+Steps to determine the panel most genetically similar to your individual.
+
+Step 1)  Merge your data with 1000 Genomes populations (26 of them) and Mbuti.DG from SGDP (Mallick et al., Nature 2016). A 1240K version of this is available at: https://reich.hms.harvard.edu/downloadable-genotypes-present-day-and-ancient-dna-data-compiled-published-papers
+
+Step 2)  Create files for f3 calculations where the files are in the format below for all 1000Genomes populations (IndName is the name of your individual).:
+1000GenomesPop1	IndName	Mbuti.DG
+1000GenomesPop2	IndName	Mbuti.DG
+
+Step 3)  Run qp3Pop from ADMIXTOOLS (https://github.com/DReichLab/AdmixTools) with these files using inbreed: YES
+
+Step 4)  Remove the top lines and bottommost line from the resulting files so that only the rows with “result: “ are left.  This can be done with the grep function.
+
+Step 5)  Concatenate all of these files into one file.
+
+Step 6)  Run FindMaxoutgroupf3.R with the following form, where directory_files is the directory where your files are, concatenated_file is the file from Step 5, output_file_name is the name of the file that will be outputted:
+Rscript FindMaxoutgroupf3.R directory_files concatenated_file output_file_name
