@@ -37,17 +37,11 @@ ind = np.genfromtxt('%s.ind' %filename, dtype = str)
 
 #check to make sure that snp and geno files are the same length
 if len(snp) != len(geno):
-	print "ERROR: snp and geno files are different lengths"
+	print('ERROR: snp and geno files are different lengths')
 	sys.exit()
 
 #open output file
 file = open('%s.readdepth' %filename, 'w')
-
-#check to see if data is pseudohaploid or diploid
-if diploid == True:
-	PH_adjust = 1
-else:
-	PH_adjust = 2
 
 #determine number of individuals in dataset
 if len(ind.shape) == 2:
@@ -55,7 +49,7 @@ if len(ind.shape) == 2:
 elif len(ind.shape) ==1:
 	ind_len = 1
 else:
-	print "ERROR: check ind file"
+	print('ERROR: check ind file')
 	sys.exit(0)
 
  
@@ -65,18 +59,18 @@ for num in range(len(snp)):
 		alt_count =0 
 		ref_count = 0
 		if geno[num][ind_pos] == '0':
-			alt_count += 1*PH_adjust
+			alt_count += 1
 		elif geno[num][ind_pos] == '2':
-			ref_count += 1*PH_adjust
+			ref_count += 1
 		elif geno[num][ind_pos] == '1':
 			if diploid == True:
 				alt_count += 1
 				ref_count += 1
 			else:
-				print "Error: geno file contains a 1 at line %s for ind %s, is not pseudohapoid" %(num, ind[ind_pos][0])
+				print('Error: geno file contains a 1 at line %s for ind %s, is not pseudohapoid' %(num, ind[ind_pos][0]))
 				sys.exit()
 		elif geno[num][ind_pos] != '9':
-			print "Error: geno file contains unexpected value at line %s" %num
+			print('Error: geno file contains unexpected value at line %s' %num)
 			sys.exit()
 		file.write('%s %s       %s %s %s :: %s  %s  %s\n' %(snp[num][0], snp[num][1], snp[num][3], snp[num][4], snp[num][5], ind[ind_pos][0], ref_count, alt_count)) 
 
