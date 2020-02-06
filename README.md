@@ -15,7 +15,7 @@ Note: In most cases you should download the 1240K panels. If you have low covera
 <br/>
 **Step 2)** Put the panels in the "panels" folder where the "helperdir" folder also is located (referred to as "directory_orig" below).
 
-Note: If you have a SNP set that is very different than the 1240k SNP set or whole-genome shotgun set then follow steps in PreProcessing folder to make your own panel.
+Note: If you have a SNP set that is very different than the 1240K SNP set or whole-genome shotgun set then follow steps in PreProcessing folder to make your own panel.
 
 
 #### Part 2) Pull down reads onto SNP set.<br/>
@@ -27,7 +27,7 @@ Chrom is chromosome number. Position is the position of the SNP on the chromosom
 **Step 1)** To obtain damaged reads, use PMDtools (https://github.com/pontussk/PMDtools) with a PMDscore threshold of 3.<br/>
 <br/>
 **Step 2)** The read count information can be obtained in any of the following ways:<br/>
-Note:  Each readdepth file must contain only a single individual for Section 2.<br/>
+Note:  Each readdepth file must contain only a single individual to be compatible for Section 2.<br/>
 <br/>
 *Option 1)*  Use samtools mpileup with the appropriate base and mapping quality cutoffs (e.g. 30). <br/>
 <br/>
@@ -43,11 +43,11 @@ python eig2readdepth.py [-d] Prefix
 *Future Option 3)* Before the end of 2020 we plan to release a pulldown program that will allow users to automatically generate the readdepth files required for ContamLD (as well as genotype files for other purposes).<br/>
 
 
-**Step 3)**  Name the files IndName_All.readdepth and IndName_dam.readdepth (IndName is the name of that particular individual. IndName_All.readdepth is the file corresponding to all reads, and IndName_dam.readdepth is the file corresponding to only damaged reads for that individual.).<br/>
+**Step 3)**  Name the files "IndName_All.readdepth" and "IndName_dam.readdepth" (IndName is the name of that particular individual. IndName_All.readdepth is the file corresponding to all reads, and IndName_dam.readdepth is the file corresponding to only damaged reads for that individual.).<br/>
 
 
 #### Part 3) Determine what panel the target individual is genetically closest to.<br/>
-Follow HowtoDetermineClosestPanel_Outgroupf3.txt instructions in the "PreProcessing" folder to run outgroupf3 statistics to determine which panel is genetically closest to the target individual.<br/>
+Follow "HowtoDetermineClosestPanel_Outgroupf3.txt" instructions in the "PreProcessing" folder to run outgroup-*f<sub>3</sub>* statistics to determine which panel is genetically closest to the target individual.<br/>
 Note: Guessing on this step is okay as long as the sample is within continental ancestry variation of the 1000 Genomes population.
 <br/>
 
