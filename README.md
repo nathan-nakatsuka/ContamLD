@@ -12,6 +12,7 @@ ContamLD is a software is designed to estimate autosomal contamination in ancien
 #### Part 1)  Download panels or prepare your own panels.<br/>
 **Step 1)** Download panels from https://reichdata.hms.harvard.edu/pub/datasets/release/contamLD<br/>
 Note: In most cases you should download the 1240K panels. If you have low coverage (<0.5X) whole-genome shotgun sequences, then you can try the SG_panels for improved power at the expense of significantly increased running time and memory requirements.<br/>
+<br/>
 **Step 2)** Put the panels in the "panels" folder where the "helperdir" folder also is located (referred to as "directory_orig" below).
 
 Note: If you have a SNP set that is very different than the 1240k SNP set or whole-genome shotgun set then follow steps in PreProcessing folder to make your own panel.
@@ -24,6 +25,7 @@ SNP_ID	Chrom\*	Position\*	REF	ALT	::	IndName*	REF_allelecount\*	ALT_allelecount\
 Chrom is chromosome number. Position is the position of the SNP on the chromosome in Hg19 coordinates. REF_allelecount and ALT_allelecount refer to the number of reads mapping to the reference or alternative allele, respectively (based on Hg19). \* indicates the necessary columns (the other columns can be filled with place holders, but the Chrom, Position, IndName, REF_allelecount, and ALT_allelecount must be in the 2nd, 3rd, 7th, 8th, and 9th columns, respectively). The files should have reads corresponding to the 1240K.snp or SG.snp files in the "PreProcessing" folder, or the snp files corresponding to the panels prepared by the user.<br/>	
 <br/>	
 **Step 1)** To obtain damaged reads, use PMDtools (https://github.com/pontussk/PMDtools) with a PMDscore threshold of 3.<br/>
+<br/>
 **Step 2)** The read count information can be obtained in any of the following ways:<br/>
 Note:  Each readdepth file must contain only a single individual for Section 2.<br/>
 <br/>
@@ -37,8 +39,8 @@ Use this file for eigenstrat format files in pseudo-haploid format (one read cho
 python eig2readdepth.py [-d] Prefix
 ```
 <br/>
-*Future Option 3)* Before the end of 2020 we hope to release a pulldown program that will allow users to automatically generate the readdepth files required for ContamLD (as well as genotype files for other purposes).<br/>
-
+*Option 3)* (future) Before the end of 2020 we plan to release a pulldown program that will allow users to automatically generate the readdepth files required for ContamLD (as well as genotype files for other purposes).<br/>
+<br/>
 **Step 3)**  Name the files IndName_All.readdepth and IndName_dam.readdepth (IndName is the name of that particular individual. IndName_All.readdepth is the file corresponding to all reads, and IndName_dam.readdepth is the file corresponding to only damaged reads for that individual.).<br/>
 
 
