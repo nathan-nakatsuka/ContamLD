@@ -15,7 +15,7 @@ Note: In most cases you should download the 1240K panels. If you have low covera
 <br/>
 **Step 2)** Put the panels in the "panels" folder where the "helperdir" folder also is located (referred to as "directory_orig" below).
 
-Note: If you have a SNP set that is very different than the 1240K SNP set or whole-genome shotgun set then follow steps in PreProcessing folder to make your own panel.
+Note: If you have a SNP set that is very different from the 1240K SNP set or whole-genome shotgun set then follow steps in PreProcessing folder to make your own panel.
 
 
 #### Part 2) Pull down reads onto SNP set.<br/>
