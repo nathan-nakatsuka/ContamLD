@@ -29,9 +29,9 @@ Chrom is chromosome number. Position is the position of the SNP on the chromosom
 **Step 2)** The read count information can be obtained in any of the following ways:<br/>
 Note:  Each readdepth file must contain only a single individual to be compatible for Section 2.<br/>
 <br/>
-*Option 1)*  Use samtools mpileup with the appropriate base and mapping quality cutoffs (e.g. 30). <br/>
+*Option 1)*  Use samtools mpileup on BAM files with the appropriate base and mapping quality cutoffs (e.g. 30). <br/>
 <br/>
-*Option 2)* If you have eigenstrat files and are unable to pull down read information from bams, use the "eig2readdepth.py" script in the "PreProcessing" folder to transform eigenstrat files to readdepth files.<br/>
+*Option 2)* If you have eigenstrat files and are unable to pull down read information from BAM files, use the "eig2readdepth.py" script in the "PreProcessing" folder to transform eigenstrat files to readdepth files.<br/>
 (Note: this has less power than the read based method because it ignores reads that map to the same site)<br/>
 -Put files in the format: Prefix.snp, Prefix.ind, Prefix.geno and damaged reads: Prefix_dam.snp, Prefix_dam.ind, Prefix_dam.geno<br/>
 Use this file for eigenstrat format files in pseudo-haploid format (one read chosen to represent the genotype, either 0=ALT or 2=REF; no heterozygotes). If you have diploid data with heterozygotes, use -d flag.
@@ -40,7 +40,7 @@ python eig2readdepth.py [-d] Prefix
 ```
 
 
-*Future Option 3)* Before the end of 2020 we plan to release a pulldown program that will allow users to automatically generate the readdepth files required for ContamLD (as well as genotype files for other purposes).<br/>
+*Future Option 3)* Before the end of 2020 we plan to release a pulldown program that will allow users to automatically generate the readdepth files, including damage restricted versions, required for ContamLD (as well as genotype files for other purposes).<br/>
 
 
 **Step 3)**  Name the files "IndName_All.readdepth" and "IndName_dam.readdepth" (IndName is the name of that particular individual. IndName_All.readdepth is the file corresponding to all reads, and IndName_dam.readdepth is the file corresponding to only damaged reads for that individual.).<br/>
