@@ -19,7 +19,7 @@ Note: If you have a SNP set that is very different from the 1240K SNP set or who
 
 
 #### Part 2) Pull down reads onto SNP set.<br/>
-ContamLD requires files with all reads and with only damaged reads in the following format (tab delimited): <br/>	
+ContamLD requires 2 sets of files, one with all reads and one with only damaged reads, both in the following format (tab delimited): <br/>	
 SNP_ID	Chrom\*	Position\*	REF	ALT	::	IndName*	REF_allelecount\*	ALT_allelecount\*<br/>
 <br/>
 Chrom is chromosome number. Position is the position of the SNP on the chromosome in Hg19 coordinates. REF_allelecount and ALT_allelecount refer to the number of reads mapping to the reference or alternative allele, respectively (based on Hg19). \* indicates the necessary columns (the other columns can be filled with place holders, but the Chrom, Position, IndName, REF_allelecount, and ALT_allelecount must be in the 2nd, 3rd, 7th, 8th, and 9th columns, respectively). The files should have reads corresponding to the 1240K.snp or SG.snp files in the "PreProcessing" folder, or the snp files corresponding to the panels prepared by the user.<br/>	
