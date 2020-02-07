@@ -33,8 +33,8 @@ Note:  Each readdepth file must contain only a single individual to be compatibl
 <br/>
 *Option 2)* If you have eigenstrat files and are unable to pull down read information from BAM files, use the "eig2readdepth.py" script in the "PreProcessing" folder to transform eigenstrat files to readdepth files.<br/>
 (Note: this has less power than the read based method because it ignores reads that map to the same site)<br/>
--Put files in the format: Prefix.snp, Prefix.ind, Prefix.geno and damaged reads: Prefix_dam.snp, Prefix_dam.ind, Prefix_dam.geno<br/>
-Use this file for eigenstrat format files in pseudo-haploid format (one read chosen to represent the genotype, either 0=ALT or 2=REF; no heterozygotes). If you have diploid data with heterozygotes, use -d flag.
+-Put files in the format: IndName_All.snp, IndName_All.ind, IndName_All.geno and damaged reads: IndName_dam.snp, IndName_dam.ind, IndName_dam.geno<br/>
+Use this file for eigenstrat format files in pseudo-haploid format (one read chosen to represent the genotype, either 0=ALT or 2=REF; no heterozygotes). If you have diploid data with heterozygotes, use the -d flag. In the script below, Prefix stands for the prefix before .snp, .ind, .geno, so IndName_All or IndName_dam.
 ```python
 python eig2readdepth.py [-d] Prefix
 ```
