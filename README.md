@@ -1,6 +1,6 @@
 # ContamLD
 
-ContamLD is a software is designed to estimate autosomal contamination in ancient DNA samples. The software requires Python 3 and R (any version should suffice).
+ContamLD is a software designed to estimate autosomal contamination in ancient DNA samples. The software requires Python 3 and R (any version should suffice).
 
 **Citation:**  Nakatsuka, N.\*; Harney, E.\*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. "Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium." BioRxiv.<br/>
 <br/>
