@@ -43,6 +43,12 @@ if len(snp) != len(geno):
 #open output file
 file = open('%s.readdepth' %filename, 'w')
 
+#check to see if data is pseudohaploid or diploid
+if diploid == True:
+	PH_adjust = 2
+else:
+	PH_adjust = 1
+
 #determine number of individuals in dataset
 if len(ind.shape) == 2:
 	ind_len, junk = ind.shape
@@ -59,9 +65,9 @@ for num in range(len(snp)):
 		alt_count =0 
 		ref_count = 0
 		if geno[num][ind_pos] == '0':
-			alt_count += 1
+			alt_count += 1*PH_adjust
 		elif geno[num][ind_pos] == '2':
-			ref_count += 1
+			ref_count += 1*PH_adjust
 		elif geno[num][ind_pos] == '1':
 			if diploid == True:
 				alt_count += 1
