@@ -1,6 +1,6 @@
 #!/bin/python
 """
-This tool converts data in eigenstrat format in to readdepth format. Note that when possible, 
+This tool converts data in eigenstrat format to readdepth format. Note that when possible, 
 we recommend instead generating readdepth files directly from the bams.
 
 Use the -d flag when using diploid data. Otherwise pseudohaploid data is assumed.
