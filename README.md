@@ -34,7 +34,7 @@ Note:  Each readdepth file must contain only a single individual to be compatibl
 *Option 2)* If you have eigenstrat files and are unable to pull down read information from BAM files, use the "eig2readdepth.py" script in the "PreProcessing" folder to transform eigenstrat files to readdepth files.<br/>
 (Note: this has less power than the read based method because it ignores reads that map to the same site)<br/>
 -Put files in the format: IndName_All.snp, IndName_All.ind, IndName_All.geno and damaged reads: IndName_dam.snp, IndName_dam.ind, IndName_dam.geno<br/>
-Use this file for eigenstrat format files in pseudo-haploid format (one read chosen to represent the genotype, either 0=ALT or 2=REF; no heterozygotes). If you have diploid data with heterozygotes, use the -d flag. In the script below, Prefix stands for the prefix before .snp, .ind, .geno, so IndName_All or IndName_dam.
+Use this file for eigenstrat format files in pseudo-haploid format (one read chosen to represent the genotype, either 0=ALT or 2=REF; no heterozygotes). If you have diploid data with heterozygotes, use the -d flag. In the script below, "Prefix" stands for the prefix before .snp, .ind, .geno, so IndName_All or IndName_dam.
 ```python
 python eig2readdepth.py [-d] Prefix
 ```
@@ -52,7 +52,7 @@ Note: Guessing on this step is okay as long as the sample is within continental 
 <br/>
 
 #### Part 4) Create a file with the names of all individuals and their corresponding panels.<br/>
-Create file called "GroupName_inds.txt" (where GroupName is the name of your collection of individuals) in the following format, where the 1000Genomes population is determined from Section 1 Part 3, and put it in same directory as the readdepth files:<br/>
+Create file called "GroupName_inds.txt" (where GroupName is the name of your collection of individuals) in the following format, where the 1000Genomes population is determined from Section 1 Part 3, and put it in the same directory as the readdepth files:<br/>
 IndName_1 1000Genomes_Pop_closesttoIndName_1<br/>
 IndName_2 1000Genomes_Pop_closesttoIndName_2<br/>
 IndName_3 1000Genomes_Pop_closesttoIndName_3<br/>
@@ -62,7 +62,7 @@ IndName_3 1000Genomes_Pop_closesttoIndName_3<br/>
 ### <p>Section 2)  Run Contamination Estimate</p>
 After you have readdepth files, the panels (placed in the panels folder), and the GroupName_inds.txt file, run ContamLD.<br/>
 Note: Run this with 3 cores if possible.<br/>
--In the following notation: "directory_orig" is the directory with helperdir and panels folders are; "directory_files" is the directory where your .readdepth and GroupName_inds.txt are.<br/>
+-In the following notation: "directory_orig" is the directory with helperdir and panels folders are; "directory_files" is the directory where your .readdepth and GroupName_inds.txt files are; "Panel_Type is the type of panel: 1240K, SG, or your own. <br/>
 
 Run the following:<br/>
 ```
@@ -72,7 +72,7 @@ cd directory_orig
 
 #!/bin/bash
 while read IndName panel; do
-bash directory_orig/helperdir/ContamLD_RunningScript.txt directory_orig directory_files ${IndName} ${panel}
+bash directory_orig/helperdir/ContamLD_RunningScript.txt directory_orig directory_files ${IndName} ${panel} Panel_Type
 done < directory_files/GroupName_inds.txt
 ```
 <br/>
