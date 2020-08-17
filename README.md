@@ -62,7 +62,7 @@ IndName_3 1000Genomes_Pop_closesttoIndName_3<br/>
 ### <p>Section 2)  Run Contamination Estimate</p>
 After you have readdepth files, the panels (placed in the panels folder), and the GroupName_inds.txt file, run ContamLD.<br/>
 Note: Run this with 3 cores if possible.<br/>
--In the following notation: "directory_orig" is the directory with helperdir and panels folders are; "directory_files" is the directory where your .readdepth and GroupName_inds.txt files are; "Panel_Type" is the type of panel: 1240K, SG, or your own. <br/>
+-In the following notation: "directory_orig" is the directory where the helperdir and panels folders are; "directory_files" is the directory where your .readdepth and GroupName_inds.txt files are; "Panel_Type" is the type of panel: 1240K, SG, or your own. <br/>
 
 Run the following:<br/>
 ```
