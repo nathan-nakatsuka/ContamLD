@@ -12,5 +12,5 @@ Step 4)  Remove the top lines and bottommost line from the resulting files so th
 
 Step 5)  Concatenate all of these files into one file.
 
-Step 6)  Run FindMaxOutgroupf3.R with the following form, where directory_files is the directory where your files are, concatenated_file is the file from Step 5, and IndFile is a .ind file of your individuals of interest before step 1 (i.e. before merging them with the 1000 Genomes populations and Mbuti.DG), output_file_name is the name of the file that will be outputted:
+Step 6)  Run FindMaxOutgroupf3.R with the following form, where directory_files is the directory where your files are, concatenated_file is the file from Step 5, IndFile is a .ind file of your individuals of interest before step 1 (i.e. before merging them with the 1000 Genomes populations and Mbuti.DG), and output_file_name is the name of the file that will be outputted:
 Rscript FindMaxOutgroupf3.R directory_files concatenated_file IndFile output_file_name
