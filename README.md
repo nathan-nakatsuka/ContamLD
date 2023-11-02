@@ -4,7 +4,7 @@ ContamLD is a software designed to estimate autosomal contamination in ancient D
 
 **Citation:**  Nakatsuka, N.\*; Harney, E.\*; Mallick, S..; Mah, M.; Patterson, N.; Reich, D. "Estimation of Ancient Nuclear DNA Contamination Using Breakdown of Linkage Disequilibrium." Genome Biology. 2020 Aug 10;21(1):199. doi: 10.1186/s13059-020-02111-2.<br/>
 <br/>
-**Contact:** Nathan Nakatsuka: nathan_nakatsuka@hms.harvard.edu
+**Contact:** Nathan Nakatsuka: 08nanaka@gmail.com
 <br/>
 <br/>
 ## <p>Steps for use:</p>
